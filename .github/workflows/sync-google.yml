@@ -4,7 +4,16 @@ on:
   schedule:
     # 09:20 UTC = 06:20 em Brasília. Cron do GitHub sempre roda em UTC.
     - cron: "20 9 * * *"
-  workflow_dispatch: # permite rodar na mão pelo painel do GitHub
+  workflow_dispatch: # rodar na mão pelo painel do GitHub
+    inputs:
+      total:
+        description: "Total de avaliações (deixe vazio para ler do Google)"
+        required: false
+        default: ""
+      nota:
+        description: "Nota, ex 5,0 (vazio mantém a atual)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -27,6 +36,9 @@ jobs:
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+          # Preenchidos só quando alguém dispara na mão informando os números.
+          ROYAL_COUNT: ${{ inputs.total }}
+          ROYAL_RATING: ${{ inputs.nota }}
         run: python scripts/sync_google.py
 
       - name: Publica se algo mudou

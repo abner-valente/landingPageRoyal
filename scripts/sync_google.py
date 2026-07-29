@@ -6,9 +6,21 @@ Roda uma vez por dia pelo GitHub Actions (.github/workflows/sync-google.yml).
 Se a API falhar ou devolver algo implausivel, sai SEM tocar no arquivo:
 um numero de ontem e melhor que um numero errado no ar.
 
+Tem dois modos:
+
+  AUTOMATICO  le do Google. Precisa de GOOGLE_MAPS_API_KEY e GOOGLE_PLACE_ID.
+  MANUAL      voce informa os numeros em ROYAL_COUNT / ROYAL_RATING, e a API
+              nem e chamada. Serve enquanto a chave nao existe e tambem como
+              atalho para corrigir na mao a qualquer momento.
+
+O caminho que reescreve o HTML e exatamente o mesmo nos dois casos; muda so
+de onde vem o numero.
+
 Variaveis de ambiente:
   GOOGLE_MAPS_API_KEY  chave da Places API (New)
   GOOGLE_PLACE_ID      Place ID do perfil da Royal no Google
+  ROYAL_COUNT          (modo manual) total de avaliacoes, ex: 290
+  ROYAL_RATING         (modo manual) nota, ex: 5,0 -- opcional, mantem a atual
 
 Codigos de saida: 0 = ok (mudou ou nao), 1 = falhou sem alterar nada.
 """
@@ -101,24 +113,41 @@ def aplicar(html: str, nota_txt: str, total: int) -> str:
 
 
 def main() -> int:
-    chave = os.environ.get("GOOGLE_MAPS_API_KEY", "").strip()
-    place_id = os.environ.get("GOOGLE_PLACE_ID", "").strip()
-    if not chave or not place_id:
-        print("ERRO: defina GOOGLE_MAPS_API_KEY e GOOGLE_PLACE_ID.", file=sys.stderr)
-        return 1
-
-    try:
-        bruto = buscar(place_id, chave)
-        nota, total = validar(bruto)
-    except urllib.error.HTTPError as e:
-        print(f"ERRO: Google respondeu HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:400]}",
-              file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"ERRO ao consultar o Google: {e}", file=sys.stderr)
-        return 1
-
     anterior = ler_estado()
+    manual = os.environ.get("ROYAL_COUNT", "").strip()
+
+    if manual:
+        # ---- modo manual: nao chama a API
+        nota_manual = os.environ.get("ROYAL_RATING", "").strip().replace(",", ".")
+        try:
+            nota, total = validar({
+                "rating": float(nota_manual) if nota_manual else anterior.get("rating", 5.0),
+                "userRatingCount": int(manual),
+            })
+        except (ValueError, TypeError) as e:
+            print(f"ERRO nos valores informados a mao: {e}", file=sys.stderr)
+            return 1
+        print(f"Modo manual: nota {nota}, {total} avaliacoes.")
+    else:
+        # ---- modo automatico: le do Google
+        chave = os.environ.get("GOOGLE_MAPS_API_KEY", "").strip()
+        place_id = os.environ.get("GOOGLE_PLACE_ID", "").strip()
+        if not chave or not place_id:
+            # Sem credenciais ainda. Avisa sem quebrar a execucao agendada,
+            # para nao gerar e-mail de falha todo dia enquanto nao houver chave.
+            print("::warning::Sincronizacao automatica desligada: faltam "
+                  "GOOGLE_MAPS_API_KEY e GOOGLE_PLACE_ID. Veja SINCRONIZACAO.md.")
+            return 0
+        try:
+            nota, total = validar(buscar(place_id, chave))
+        except urllib.error.HTTPError as e:
+            print(f"ERRO: Google respondeu HTTP {e.code}: "
+                  f"{e.read().decode('utf-8', 'replace')[:400]}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"ERRO ao consultar o Google: {e}", file=sys.stderr)
+            return 1
+
     total_antes = anterior.get("userRatingCount")
     if isinstance(total_antes, int) and total < total_antes * (1 - QUEDA_MAXIMA):
         print(
