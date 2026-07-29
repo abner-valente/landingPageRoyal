@@ -5,8 +5,9 @@ automaticamente uma vez por dia, a partir do perfil da Royal no Google.
 
 ## Como funciona
 
-1. Todo dia às 06:20 (horário de Brasília) o GitHub Actions roda
-   `scripts/sync_google.py`.
+1. Todo dia às 06:00 (horário de Brasília) o GitHub Actions roda
+   `scripts/sync_google.py`. Em horários de pico o GitHub pode atrasar
+   execuções agendadas em alguns minutos — isso é normal e não atrapalha.
 2. O script consulta a **Places API (New)** do Google e lê dois campos:
    `rating` e `userRatingCount`.
 3. Se algo mudou, ele reescreve os valores no `index.html`, atualiza o
@@ -70,6 +71,14 @@ No repositório, em *Settings → Secrets and variables → Actions*, crie:
 |---|---|
 | `GOOGLE_MAPS_API_KEY` | a chave criada no passo 1 |
 | `GOOGLE_PLACE_ID` | o Place ID do passo 2 |
+
+> **Atenção: tem que ser na aba _Secrets_, não na aba _Variables_.** As duas
+> ficam na mesma tela e é fácil confundir. A diferença importa por dois
+> motivos: o workflow lê de `secrets`, então em *Variables* o valor
+> simplesmente não chega; e *Variables* não são criptografadas nem mascaradas
+> nos logs. Como este repositório é público e os logs de Actions de
+> repositório público são visíveis para qualquer pessoa, uma chave guardada
+> como variável pode vazar. Em *Secrets* ela aparece como `***`.
 
 Guarde-os aí e em nenhum outro lugar. Eles nunca aparecem no código nem na
 página publicada.

@@ -2,18 +2,20 @@ name: Sincroniza avaliações do Google
 
 on:
   schedule:
-    # 09:20 UTC = 06:20 em Brasília. Cron do GitHub sempre roda em UTC.
-    - cron: "20 9 * * *"
+    # 09:00 UTC = 06:00 em Brasília. Cron do GitHub sempre roda em UTC, e o
+    # Brasil nao tem mais horario de verao, entao a conta e fixa (UTC-3).
+    # O GitHub pode atrasar execucoes agendadas em horarios de pico; o
+    # numero de avaliacoes nao muda de minuto em minuto, entao tudo bem.
+    - cron: "0 9 * * *"
   workflow_dispatch: # rodar na mão pelo painel do GitHub
     inputs:
       total:
-        # Obrigatorio e sem valor padrao de proposito: assim o GitHub nao
-        # deixa disparar em branco. Enquanto nao existe chave da API, o modo
-        # manual e o unico que funciona, entao o campo sempre precisa vir
-        # preenchido. Quando a chave existir, da para torna-lo opcional de
-        # novo para permitir forcar uma leitura do Google na mao.
-        description: "Total de avaliações que aparece no Google (ex: 291)"
-        required: true
+        # Opcional de novo agora que existe chave da API: em branco significa
+        # "leia do Google", que e uma acao util. Se faltar a chave, o script
+        # falha explicando, em vez de terminar em verde sem fazer nada.
+        description: "Total de avaliações — deixe VAZIO para ler do Google"
+        required: false
+        default: ""
       nota:
         description: "Nota — deixe vazio para manter a atual (ex: 5,0)"
         required: false
