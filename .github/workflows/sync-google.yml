@@ -1,0 +1,42 @@
+name: Sincroniza avaliações do Google
+
+on:
+  schedule:
+    # 09:20 UTC = 06:20 em Brasília. Cron do GitHub sempre roda em UTC.
+    - cron: "20 9 * * *"
+  workflow_dispatch: # permite rodar na mão pelo painel do GitHub
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-google
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Consulta o Google e atualiza o index.html
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: python scripts/sync_google.py
+
+      - name: Publica se algo mudou
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nada mudou; nenhum commit criado."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html dados-google.json
+          git commit -m "Atualiza nota e numero de avaliacoes do Google"
+          git push
