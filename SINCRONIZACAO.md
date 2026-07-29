@@ -17,7 +17,29 @@ Se nada mudou, nenhum commit é criado. Se a consulta falhar, **nada é
 alterado** — a página continua com o último valor bom, e a execução aparece
 como falha no painel do GitHub.
 
+## Atualizar na mão (funciona hoje, sem configurar nada)
+
+Enquanto a chave da API não existir — ou sempre que quiser corrigir na hora —
+dá para atualizar pelo painel do GitHub, sem mexer em código:
+
+1. Aba **Actions → Sincroniza avaliações do Google → Run workflow**
+2. Preencha **Total de avaliações** com o número que está no Google
+3. **Nota** só se ela tiver mudado; vazio mantém a atual
+4. **Run workflow**
+
+O script reescreve os cinco pontos da página e as quatro tags de
+compartilhamento, faz commit, e o Netlify publica. Leva menos de um minuto.
+
+É o mesmo código do modo automático — muda só de onde vem o número, então não
+existe risco de os dois caminhos divergirem.
+
 ## O que precisa ser configurado (uma vez só)
+
+> **Sobre o pré-pagamento de R$200:** ele é exigido quando a forma de
+> pagamento escolhida é **PIX**. Com **cartão de crédito**, o Google faz
+> apenas uma verificação, sem depósito. Se a tela pedir os R$200, volte e
+> troque a forma de pagamento. O valor pago vira crédito de uso e é
+> reembolsável se a conta for encerrada sem consumo.
 
 ### 1. Chave da Places API
 
