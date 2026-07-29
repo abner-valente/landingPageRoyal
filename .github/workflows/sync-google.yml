@@ -7,11 +7,15 @@ on:
   workflow_dispatch: # rodar na mão pelo painel do GitHub
     inputs:
       total:
-        description: "Total de avaliações (deixe vazio para ler do Google)"
-        required: false
-        default: ""
+        # Obrigatorio e sem valor padrao de proposito: assim o GitHub nao
+        # deixa disparar em branco. Enquanto nao existe chave da API, o modo
+        # manual e o unico que funciona, entao o campo sempre precisa vir
+        # preenchido. Quando a chave existir, da para torna-lo opcional de
+        # novo para permitir forcar uma leitura do Google na mao.
+        description: "Total de avaliações que aparece no Google (ex: 291)"
+        required: true
       nota:
-        description: "Nota, ex 5,0 (vazio mantém a atual)"
+        description: "Nota — deixe vazio para manter a atual (ex: 5,0)"
         required: false
         default: ""
 
