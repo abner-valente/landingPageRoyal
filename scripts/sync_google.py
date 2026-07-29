@@ -152,8 +152,22 @@ def main() -> int:
         try:
             nota, total = validar(buscar(place_id, chave))
         except urllib.error.HTTPError as e:
-            print(f"ERRO: Google respondeu HTTP {e.code}: "
-                  f"{e.read().decode('utf-8', 'replace')[:400]}", file=sys.stderr)
+            corpo = e.read().decode("utf-8", "replace")[:400]
+            print(f"ERRO: Google respondeu HTTP {e.code}: {corpo}", file=sys.stderr)
+            if e.code in (401, 403):
+                print(
+                    "\nHTTP 403 aqui quase sempre e uma destas quatro coisas:\n"
+                    "  1. A 'Places API (New)' nao esta ativada no projeto. Atencao: ela e\n"
+                    "     um produto SEPARADO da 'Places API' antiga. Ativar a antiga nao\n"
+                    "     libera as chamadas a places.googleapis.com/v1.\n"
+                    "  2. A chave tem restricao de API e a 'Places API (New)' nao esta na\n"
+                    "     lista de APIs permitidas.\n"
+                    "  3. A chave tem restricao por referrer HTTP ou por IP. Quem chama aqui\n"
+                    "     e o GitHub Actions, cujos IPs mudam -- nao use esse tipo de\n"
+                    "     restricao. Restricao por Android/iOS tambem nao funciona.\n"
+                    "  4. O faturamento nao esta vinculado ao projeto da chave.\n",
+                    file=sys.stderr,
+                )
             return 1
         except Exception as e:
             print(f"ERRO ao consultar o Google: {e}", file=sys.stderr)
