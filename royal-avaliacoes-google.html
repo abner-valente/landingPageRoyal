@@ -341,6 +341,58 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
   }
+
+  /* ---------- impressão / pdf ---------- */
+  @media print{
+    @page{margin:14mm;}
+    html,body{background:#fff; color:#14181f;}
+    .bg-noise{display:none;}
+
+    /* o logo é claro: preserva o fundo escuro apenas atrás dele */
+    .brandbar{
+      background:var(--navy-950); padding:10px 16px; border-radius:4px;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+
+    /* controles sem função no papel */
+    .update-btn, .cta-row, .btn, .link-row, .copy-btn{display:none;}
+
+    h1, .section-title, .qr-copy h2, .proof-copy h2, .qrcard h3, .final-cta h2,
+    .score-sub strong, .person .meta-name, .chip .w{color:#0A1626;}
+    h1 em, .eyebrow, .section-label, .quote-mark, .card .stars-sm,
+    .score-number, .more-note a{color:#8a6d15;}
+    .score-number{text-shadow:none;}
+    .eyebrow::before, .eyebrow::after{background:#8a6d15;}
+    .score-sub, .section-note, .card p.text, .proof-copy p, .qr-copy p,
+    .qrcard p, .final-cta p, .more-note, .person .meta-sub, .chip .n,
+    .qrlink-box, footer{color:#3f4753;}
+    footer .fname{color:#0A1626;}
+
+    .trustmap, .qrsection, .final-cta, footer,
+    .qr-card, .qrcard, .qrlink-box{background:none; border-color:#ccd2db;}
+
+    .chip{
+      background:none; border-color:#ccd2db;
+      opacity:1 !important; transform:none !important; animation:none !important;
+    }
+    .chip.t1{background:none; border-color:#8a6d15;}
+    .chip.t1 .w{color:#8a6d15;}
+
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .card, .js .card{
+      opacity:1 !important; transform:none !important;
+      background:none; border-color:#ccd2db;
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .avatar{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+
+    .proof-photo, .qr-box, .qrcard .qrbox{break-inside:avoid; page-break-inside:avoid;}
+    .qr-box, .qrcard .qrbox{background:#fff; border:1px solid #ccd2db;}
+
+    .hero{padding:24px 0 18px;}
+    .trustmap{padding:26px 0;}
+    .testimonials, .qr-cta, .proof, .qrsection, .final-cta{padding:22px 0;}
+  }
 </style>
 </head>
 <body>
