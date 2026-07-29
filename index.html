@@ -185,12 +185,18 @@
 
   /* ---------- testimonials ---------- */
   .testimonials{padding:80px 0 30px; position:relative; z-index:1;}
+  /* flex em vez de grid: com 14 depoimentos a ultima fileira fica
+     incompleta, e so o flex consegue centraliza-la em vez de deixar
+     um buraco na direita. flex-grow 0 impede que os cards restantes
+     estiquem e fiquem maiores que os das fileiras cheias. */
   .grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
     gap:20px;
   }
   .card{
+    flex:0 1 calc((100% - 40px) / 3);
     background:var(--navy-800);
     border:1px solid var(--navy-700);
     border-radius:6px;
@@ -287,10 +293,6 @@
     margin-bottom:16px; color:var(--cream);
   }
   .proof-copy p{color:var(--slate); font-size:15px; margin-bottom:14px;}
-  .storefront-strip{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:26px;
-  }
-  .storefront-strip img{border-radius:5px; border:1px solid var(--navy-700);}
 
   /* ---------- final cta / footer ---------- */
   .qrsection{
@@ -365,12 +367,11 @@
   .fcontato svg{width:14px; height:14px; flex-shrink:0; color:var(--gold);}
 
   @media (max-width:860px){
-    .grid{grid-template-columns:repeat(2,1fr);}
+    .card{flex-basis:calc((100% - 20px) / 2);}
     .proof-grid{grid-template-columns:1fr;}
-    .storefront-strip{grid-template-columns:repeat(4,1fr);}
   }
   @media (max-width:560px){
-    .grid{grid-template-columns:1fr;}
+    .card{flex-basis:100%;}
     .wrap{padding:0 20px;}
     .hero{padding:48px 0 30px;}
     .trustmap{padding:52px 0 40px;}
@@ -417,8 +418,8 @@
     .chip.t1{background:none; border-color:#8a6d15;}
     .chip.t1 .w{color:#8a6d15;}
 
-    .grid{grid-template-columns:repeat(2,1fr);}
     .card, .js .card{
+      flex-basis:calc((100% - 20px) / 2);
       opacity:1 !important; transform:none !important;
       background:none; border-color:#ccd2db;
       break-inside:avoid; page-break-inside:avoid;
@@ -631,7 +632,7 @@
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
       <blockquote class="text">Tive uma ótima experiência com a Royal Imóveis. Comunicação fluida, profissionais comprometidos e organizados. Sempre que precisei de suporte, o Pedro Ruiz se colocou à disposição. Recomendo!</blockquote>
       <div class="person">
-        <div class="avatar">PA</div>
+        <div class="avatar">PV</div>
         <div><div class="meta-name">Paulo Vitor Pires de Aragão</div><div class="meta-sub">3 avaliações · 6 meses atrás</div></div>
       </div>
     </div>
