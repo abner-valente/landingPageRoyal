@@ -1,0 +1,5 @@
+# Site estatico de arquivo unico: nao ha nada para compilar.
+# Publica a raiz do repositorio como esta, e o Netlify serve index.html.
+[build]
+  publish = "."
+  command = ""
