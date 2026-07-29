@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Royal Imóveis RJ — A Confiança dos Nossos Clientes</title>
+<script>if('IntersectionObserver' in window){document.documentElement.classList.add('js');}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -170,10 +171,10 @@
     border-radius:6px;
     padding:26px 24px 22px;
     display:flex; flex-direction:column; gap:16px;
-    opacity:0; transform:translateY(16px);
     transition:opacity .6s ease, transform .6s ease, border-color .25s ease;
   }
-  .card.inview{opacity:1; transform:translateY(0);}
+  .js .card{opacity:0; transform:translateY(16px);}
+  .js .card.inview{opacity:1; transform:translateY(0);}
   .card:hover{border-color:var(--gold);}
   .quote-mark{
     font-family:'Fraunces',serif; font-size:40px; color:var(--gold);
@@ -614,10 +615,12 @@
 </footer>
 
 <script>
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('inview'); obs.unobserve(e.target);} });
-  }, {threshold:.15});
-  document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+  if(document.documentElement.classList.contains('js')){
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('inview'); obs.unobserve(e.target);} });
+    }, {threshold:.15});
+    document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+  }
 
   function copyReviewLink(){
     const input = document.getElementById('reviewLinkInput');
