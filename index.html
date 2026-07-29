@@ -205,7 +205,7 @@
     font-family:'Fraunces',serif; font-size:40px; color:var(--gold);
     line-height:.5; height:20px;
   }
-  .card p.text{font-size:14.5px; color:#DCE3EE; flex-grow:1;}
+  .card .text{font-size:14.5px; color:#DCE3EE; flex-grow:1;}
   .card .stars-sm{color:var(--gold); font-size:13px; line-height:1; letter-spacing:2px;}
   .person{display:flex; align-items:center; gap:12px; margin-top:4px;}
   .avatar{
@@ -419,6 +419,31 @@
     .testimonials, .qr-cta, .proof, .qrsection, .final-cta{padding:22px 0;}
   }
 </style>
+
+<!-- Dados estruturados do negocio. De proposito NAO ha aggregateRating nem
+     review aqui: o Google nao aceita nota que a propria empresa publica sobre
+     si mesma ("self-serving review"), entao isso nao viraria estrela na busca
+     e ainda contraria as diretrizes. A nota real e lida do perfil do Google,
+     para onde o sameAs abaixo aponta. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Royal Imóveis RJ",
+  "url": "https://royalimoveis.netlify.app/",
+  "image": "https://royalimoveis.netlify.app/og-image.jpg",
+  "telephone": "+55 21 99800-1209",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Estr. dos Três Rios, 1097 - Lj G",
+    "addressLocality": "Rio de Janeiro",
+    "addressRegion": "RJ",
+    "addressCountry": "BR"
+  },
+  "areaServed": { "@type": "City", "name": "Rio de Janeiro" },
+  "sameAs": ["https://www.google.com/maps?cid=7411684396186397926"]
+}
+</script>
 </head>
 <body>
 <div class="bg-noise"></div>
@@ -432,6 +457,8 @@
     Ver avaliações atualizadas no Google
   </a>
 </header>
+
+<main>
 
 <section class="hero wrap">
   <div class="eyebrow">Reputação verificada no Google</div>
@@ -459,7 +486,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-label">O que os clientes mais dizem</div>
-      <div class="section-title">Mapa de confiança</div>
+      <h2 class="section-title">Mapa de confiança</h2>
       <p class="section-note">Palavras extraídas diretamente das avaliações reais no Google — quanto maior, mais vezes foi citada pelos nossos clientes.</p>
     </div>
     <div class="chipfield">
@@ -480,7 +507,7 @@
 <section class="testimonials wrap" id="depoimentos">
   <div class="section-head">
     <div class="section-label">Depoimentos reais</div>
-    <div class="section-title">Direto do Google, sem edição</div>
+    <h2 class="section-title">Direto do Google, sem edição</h2>
   </div>
 
   <div class="grid">
@@ -488,7 +515,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Minha experiência com a Royal começou com a Katia e o Rayan e não poderia ter sido melhor. Katia sempre muito solícita, simpática e extremamente prestativa. Rayan realizou um trabalho impecável nas fotografias e imagens do imóvel.</p>
+      <blockquote class="text">Minha experiência com a Royal começou com a Katia e o Rayan e não poderia ter sido melhor. Katia sempre muito solícita, simpática e extremamente prestativa. Rayan realizou um trabalho impecável nas fotografias e imagens do imóvel.</blockquote>
       <div class="person">
         <div class="avatar">RC</div>
         <div><div class="meta-name">Rafaela Cavalcanti</div><div class="meta-sub">4 avaliações · 4 meses atrás</div></div>
@@ -498,7 +525,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Nossa experiência com a Royal, liderada pelo Sr. Pedro, foi excelente. Agiram com total transparência, honestidade e muita eficiência, transmitiram total confiança do início ao fim do processo.</p>
+      <blockquote class="text">Nossa experiência com a Royal, liderada pelo Sr. Pedro, foi excelente. Agiram com total transparência, honestidade e muita eficiência, transmitiram total confiança do início ao fim do processo.</blockquote>
       <div class="person">
         <div class="avatar">JC</div>
         <div><div class="meta-name">Joel Correa</div><div class="meta-sub">Local Guide · 54 avaliações · 1 mês atrás</div></div>
@@ -508,7 +535,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Fui muito bem atendida pelo Pedro Ruiz desde a primeira mensagem que mandei — super atencioso, educado e tirou todas as minhas dúvidas. Profissionais excelentes, honestos e comprometidos com o cliente!</p>
+      <blockquote class="text">Fui muito bem atendida pelo Pedro Ruiz desde a primeira mensagem que mandei — super atencioso, educado e tirou todas as minhas dúvidas. Profissionais excelentes, honestos e comprometidos com o cliente!</blockquote>
       <div class="person">
         <div class="avatar">PB</div>
         <div><div class="meta-name">Priscila Belgues</div><div class="meta-sub">8 avaliações · 5 meses atrás</div></div>
@@ -518,7 +545,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Uma empresa como a Royal, de máxima excelência, se destaca pela confiança, transparência e dedicação em cada atendimento. Mais do que vender imóveis, ela realiza sonhos e conecta pessoas ao lugar ideal.</p>
+      <blockquote class="text">Uma empresa como a Royal, de máxima excelência, se destaca pela confiança, transparência e dedicação em cada atendimento. Mais do que vender imóveis, ela realiza sonhos e conecta pessoas ao lugar ideal.</blockquote>
       <div class="person">
         <div class="avatar">WR</div>
         <div><div class="meta-name">Wescley Ribeiro</div><div class="meta-sub">3 avaliações · 2 meses atrás</div></div>
@@ -528,7 +555,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Quero parabenizar o excelente trabalho da equipe Royal, em especial a dedicação do Pedro Ruiz — em todas as etapas do processo me senti segura e assistida. Esse é o diferencial da empresa!</p>
+      <blockquote class="text">Quero parabenizar o excelente trabalho da equipe Royal, em especial a dedicação do Pedro Ruiz — em todas as etapas do processo me senti segura e assistida. Esse é o diferencial da empresa!</blockquote>
       <div class="person">
         <div class="avatar">MR</div>
         <div><div class="meta-name">Marcelle Rosadas</div><div class="meta-sub">2 avaliações · 1 mês atrás</div></div>
@@ -538,7 +565,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">A partir dessa compra, a Royal, principalmente a Katia, se tornaram nossos corretores para sempre. Atendimento impecável desde o contato inicial até a assinatura das escrituras. Parabéns pela empresa incrível!</p>
+      <blockquote class="text">A partir dessa compra, a Royal, principalmente a Katia, se tornaram nossos corretores para sempre. Atendimento impecável desde o contato inicial até a assinatura das escrituras. Parabéns pela empresa incrível!</blockquote>
       <div class="person">
         <div class="avatar">RP</div>
         <div><div class="meta-name">Rafael Frizeiro Perez</div><div class="meta-sub">Local Guide · 13 avaliações · 2 meses atrás</div></div>
@@ -548,7 +575,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Vendi meu imóvel estando fora do Brasil e todo o processo foi remoto. Gerou dúvidas de minha parte, mas todas foram esclarecidas com atenção e rapidez, inclusive aos finais de semana.</p>
+      <blockquote class="text">Vendi meu imóvel estando fora do Brasil e todo o processo foi remoto. Gerou dúvidas de minha parte, mas todas foram esclarecidas com atenção e rapidez, inclusive aos finais de semana.</blockquote>
       <div class="person">
         <div class="avatar">EO</div>
         <div><div class="meta-name">Elizabeth Oliveira</div><div class="meta-sub">8 avaliações · 2 meses atrás</div></div>
@@ -558,7 +585,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Os profissionais da Royal são extremamente dedicados e atenciosos. Todas as visitas ao meu imóvel foram pontuais, com comunicação clara e organizada do início ao fim. Super indico!</p>
+      <blockquote class="text">Os profissionais da Royal são extremamente dedicados e atenciosos. Todas as visitas ao meu imóvel foram pontuais, com comunicação clara e organizada do início ao fim. Super indico!</blockquote>
       <div class="person">
         <div class="avatar">BF</div>
         <div><div class="meta-name">Bárbara Ferreira</div><div class="meta-sub">Local Guide · 19 avaliações · 5 meses atrás</div></div>
@@ -568,7 +595,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Consultoria imobiliária... não é só isso que você vai encontrar aqui. Profissionalismo, ética, responsabilidade, respeito e o mais puro desejo de realizar os sonhos dos clientes.</p>
+      <blockquote class="text">Consultoria imobiliária... não é só isso que você vai encontrar aqui. Profissionalismo, ética, responsabilidade, respeito e o mais puro desejo de realizar os sonhos dos clientes.</blockquote>
       <div class="person">
         <div class="avatar">RA</div>
         <div><div class="meta-name">Rogerio Andrade</div><div class="meta-sub">Local Guide · 210 avaliações · 6 meses atrás</div></div>
@@ -578,7 +605,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Só tenho a agradecer a Royal Imóveis por ter feito parte da aquisição do meu apartamento. Agradeço também à Kátia e ao Pedro, pessoas sérias, honestas, íntegras e de total confiança.</p>
+      <blockquote class="text">Só tenho a agradecer a Royal Imóveis por ter feito parte da aquisição do meu apartamento. Agradeço também à Kátia e ao Pedro, pessoas sérias, honestas, íntegras e de total confiança.</blockquote>
       <div class="person">
         <div class="avatar">DC</div>
         <div><div class="meta-name">DJ Carlos Mix</div><div class="meta-sub">5 avaliações · 5 meses atrás</div></div>
@@ -588,7 +615,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Tive uma ótima experiência com a Royal Imóveis. Comunicação fluida, profissionais comprometidos e organizados. Sempre que precisei de suporte, o Pedro Ruiz se colocou à disposição. Recomendo!</p>
+      <blockquote class="text">Tive uma ótima experiência com a Royal Imóveis. Comunicação fluida, profissionais comprometidos e organizados. Sempre que precisei de suporte, o Pedro Ruiz se colocou à disposição. Recomendo!</blockquote>
       <div class="person">
         <div class="avatar">PA</div>
         <div><div class="meta-name">Paulo Vitor Pires de Aragão</div><div class="meta-sub">3 avaliações · 6 meses atrás</div></div>
@@ -598,7 +625,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Agradeço muito à equipe Royal por ter se esforçado ao máximo e realizado nosso sonho, principalmente o Pedro e o Thiago — vocês fizeram toda a diferença! Super indico!</p>
+      <blockquote class="text">Agradeço muito à equipe Royal por ter se esforçado ao máximo e realizado nosso sonho, principalmente o Pedro e o Thiago — vocês fizeram toda a diferença! Super indico!</blockquote>
       <div class="person">
         <div class="avatar">PA</div>
         <div><div class="meta-name">Paulo Aloe</div><div class="meta-sub">11 avaliações · 1 mês atrás</div></div>
@@ -608,7 +635,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Tive a experiência de comprar e vender um imóvel pela Royal. Fui atendido pela Katia Gonzaga, uma vendedora incansável, com um trabalho impecável do início ao fim.</p>
+      <blockquote class="text">Tive a experiência de comprar e vender um imóvel pela Royal. Fui atendido pela Katia Gonzaga, uma vendedora incansável, com um trabalho impecável do início ao fim.</blockquote>
       <div class="person">
         <div class="avatar">LE</div>
         <div><div class="meta-name">Luiz Gabriel Effgen</div><div class="meta-sub">7 avaliações · 5 meses atrás</div></div>
@@ -618,7 +645,7 @@
     <div class="card">
       <div class="quote-mark">"</div>
       <div class="stars-sm" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
-      <p class="text">Fiquei muito satisfeito com o atendimento da equipe Royal Imóveis. É notável o comprometimento, a busca por qualidade e a satisfação do cliente sempre em primeiro lugar. Recomendo!</p>
+      <blockquote class="text">Fiquei muito satisfeito com o atendimento da equipe Royal Imóveis. É notável o comprometimento, a busca por qualidade e a satisfação do cliente sempre em primeiro lugar. Recomendo!</blockquote>
       <div class="person">
         <div class="avatar">CE</div>
         <div><div class="meta-name">Cláudio Eduardo</div><div class="meta-sub">3 avaliações · 7 meses atrás</div></div>
@@ -664,7 +691,7 @@
 <section class="qrsection wrap">
   <div class="section-head">
     <div class="section-label">Sua vez de avaliar</div>
-    <div class="section-title">Ajude outras pessoas a nos conhecer</div>
+    <h2 class="section-title">Ajude outras pessoas a nos conhecer</h2>
   </div>
   <div class="qrcard">
     <div class="qrbox"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnYAAAJ2CAIAAABdNliuAAAOY0lEQVR4nO3dsZHD2BVFQVE1KSgE5bGhbx7r05FFY3yFsN/gqbfvo9ueAgkQmFOw7uv38/4XAPBt/57+AgBwJ4kFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkDipzjof/77R3HYy/zvrz8P/7K4nueffu78e24599kzevJvdK64SoUtv/uTFVfeWywAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkAiWdo5t2Ul49x9ixazCyFWR07ct59z7r4tpllbvue52TvZWywAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBieGnn3Oxawn3rE1vct/cyu+KyZZNny9bNk/8z+J98wlssACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAYs3SzpPNbp6c27K4ssXsMszsgs2WX3P2nuefz1ssACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAwtLOVezSnCg2ZM6POfvp58fc8unntlyl2Y0jvstbLAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQGLN0s6TNyXuW8UpzO6TbFmGKe6l+/adtmzyzHry/+Rz3mIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASw0s7WzYltijWPBxz6piz7rueW445y//k7/IWCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkEiWdrZsSvBdW/ZJZu/PLdssdmlOFOde2HI97+MtFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBIJEs7RS27FTctyVSsE9yYvbcz235nvc9xfc9HfedkbdYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWARLK0s2V541yxvFFcpS3fs1i0KM5oy7lv+d3P3XdGhdntoNk9oi2/u7dYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWARLK0c27LUsS5J3/P4tO3uO8qPXkRaMsyzJOfo9n/YOe8xQJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACRev5/31w+6ZQNh1patmy3bF/ed0bnZtZn7rtKW3aQt3/PcfQtL3mIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASydLOfe5bMrlvT+O+Yxbuu5dmuetObFnFKXiLBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASCRLO7P7D9Yn+JYtuzT3ffqWtZktZ7RlDWnLnXzOWywAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkAiWdo5N7v/MLu8UdiyT8KJLb/RlhWXc0/e5ClsWcUpeIsFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABI/BQHnd2UKGxZtLjP7EbHlt2kWU++nsUZbfn/WVzPLff8OW+xAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsAidfv5/31g87u0ty3U7Fl52f2yt+30VHYcj1nN3nus+WJu2+LyVssACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJA4qc46H0LDOdm13vOFXsaT966cX9+99O37Pw8ecFmy/7YLG+xAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsAiWRpZ3aB4dyT1ydmr+eWX/PclpWh2Q2Zc1v+h8x++pYnrvj0LU+ct1gASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYBEsrRTuG/BZnYZZnYlozC7JTJ7h2xZLnryGRW23EuzZs/dWywAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBizdJOsSmxZT/nvn2SwpM3T+7boTo3e+5bPPn+nOUtFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBIDG8tHPfmsfs+sS5LdezsGWj49yW3+i+xZUtG0ezn77l/ix4iwWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEgkSztblky27OfctyVy7sn30n3uW1zZckaz+zn3/Vc85y0WABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgkSztnLtvn2R2fWKLJ+9+3Pe7z/6aW/4zFLZscD35e3qLBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASLx+P+/p73Bkdh3l3Jbvee6+rZtzsxsds5s8920Hbdl3evIxC7P/P73FAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJH6Kgz55V2F2feK+zZNz9633bDH7xJ2b3U0q3Lefc99elrdYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAxOv38/76QbdsicxuShRmlze22HLus9/TjsrUp89eeU/Hd3mLBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASPwUB71v0WLLpsR9tvxG57b8mlt2qGaf9y1Xqfj0LVtMs7zFAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJF6/n/fXDzq7jrLl089tuUo2ZKY+fcudXLjv6dhyh5x78r3kLRYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAxvLRTmN2UOLdlJaOwZcFm9tO3HLOw5dfc4r47pGBpBwDWkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAInhpZ0tqw6zmydPtuV3n3XfVZp9jras92zZutnyHBW8xQJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACR+pr/A982u99y3yfPk3aTCk+86n/5MW6588eneYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABJrlnaKDYT79jSevGhRuO+MZjd5tlylLWtIW2xZPyt4iwWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEi8fj/v6e/A39iyPrFlIWR2bebJnnw9tzzF57Y87+eK6+ktFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBIPFTHPS+BYbC+aqDPY3vmj2j+67nuS37TsUW06wtG0f3LSx5iwWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEgkSzvn7ttV2LK8ca5YHdmyuFKYPffZT5/9jYpz33InP3k/Z/bp8BYLAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQEJiASAhsQCQGF7aOXffRse5YimiOOZ9u0nnZtc87lvvKWx5js5tWZe6bzvonLdYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAxJqlHU7ct45SuG/zZMtu0n2LK7ObPFuOeW7LdtA5b7EAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJSzsM2LK4ct9y0eySyZbfaMty0bnid599irc8m95iASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEmuWdrYsmRTu2+go9jRmlze27L3M2nJGW5642Xtpy685y1ssACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJA4vX7eX/9oMU2y33uW5/Ysryx5Xs+2ZZ9p8LsEtQWW55Nb7EAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwCJZGkHAPAWCwAJiQWAhMQCQEJiASAhsQCQkFgASEgsACQkFgASEgsACYkFgITEAkBCYgEgIbEAkJBYAEhILAAkJBYAEhILAAmJBYCExAJAQmIBICGxAJCQWABISCwAJCQWABISCwAJiQWAhMQCQOL/5U3IuVs2gPEAAAAASUVORK5CYII=" alt="QR Code para avaliar a Royal Imóveis RJ no Google"></div>
@@ -685,6 +712,8 @@
   <p>Compartilhe esta página com seus clientes e mostre, com dados reais do Google, por que a Royal Imóveis RJ é referência de confiança no Rio de Janeiro.</p>
   <a class="btn btn-gold" href="https://www.google.com/maps?cid=7411684396186397926" target="_blank" rel="noopener">Ver perfil completo no Google →</a>
 </section>
+
+</main>
 
 <footer>
   <div class="fname">ROYAL IMÓVEIS RJ</div>
