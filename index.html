@@ -43,7 +43,7 @@
     --gold-light:#F0D778;
     --cream:#F5F1E6;
     --slate:#93A1B8;
-    --slate-dim:#5f6d84;
+    --slate-dim:#7C8AA3; /* 5,6:1 sobre --navy-950. Nao escurecer: e o texto do rodape */
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -350,6 +350,19 @@
   }
   footer .fname{color:var(--slate); font-weight:700; letter-spacing:.05em;}
   footer .fline{margin-top:6px;}
+  footer a{
+    color:inherit; text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  footer a:hover{color:var(--gold-light); border-bottom-color:rgba(240,215,120,.45);}
+  .fcontato{
+    margin-top:12px;
+    display:flex; justify-content:center; align-items:center;
+    gap:8px 20px; flex-wrap:wrap;
+  }
+  .fcontato a{display:inline-flex; align-items:center; gap:7px;}
+  .fcontato svg{width:14px; height:14px; flex-shrink:0; color:var(--gold);}
 
   @media (max-width:860px){
     .grid{grid-template-columns:repeat(2,1fr);}
@@ -392,6 +405,7 @@
     .qrcard p, .final-cta p, .more-note, .person .meta-sub, .chip .n,
     .qrlink-box, footer{color:#3f4753;}
     footer .fname{color:#0A1626;}
+    .fcontato svg{color:#8a6d15;}
 
     .trustmap, .qrsection, .final-cta, footer,
     .qr-card, .qrcard, .qrlink-box{background:none; border-color:#ccd2db;}
@@ -717,7 +731,19 @@
 
 <footer>
   <div class="fname">ROYAL IMÓVEIS RJ</div>
-  <div class="fline">Estr. dos Três Rios, 1097 - Lj G · Freguesia (Jacarepaguá), Rio de Janeiro - RJ · (21) 99800-1209</div>
+  <div class="fline">
+    <a href="https://www.google.com/maps?cid=7411684396186397926" target="_blank" rel="noopener">Estr. dos Três Rios, 1097 - Lj G · Freguesia (Jacarepaguá), Rio de Janeiro - RJ</a>
+  </div>
+  <div class="fcontato">
+    <a href="tel:+5521998001209">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (21) 99800-1209
+    </a>
+    <a href="https://wa.me/5521998001209" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      WhatsApp
+    </a>
+  </div>
 </footer>
 
 <script>
