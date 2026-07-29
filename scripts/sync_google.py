@@ -133,8 +133,19 @@ def main() -> int:
         chave = os.environ.get("GOOGLE_MAPS_API_KEY", "").strip()
         place_id = os.environ.get("GOOGLE_PLACE_ID", "").strip()
         if not chave or not place_id:
-            # Sem credenciais ainda. Avisa sem quebrar a execucao agendada,
-            # para nao gerar e-mail de falha todo dia enquanto nao houver chave.
+            if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+                # Alguem clicou em "Run workflow" e deixou o campo vazio.
+                # Silenciar aqui daria a impressao de que atualizou.
+                print(
+                    "ERRO: voce disparou na mao mas deixou 'Total de avaliacoes' "
+                    "em branco, e ainda nao ha chave do Google configurada, entao "
+                    "nao havia de onde tirar o numero. Rode de novo preenchendo o "
+                    "campo com o total que aparece no Google.",
+                    file=sys.stderr,
+                )
+                return 1
+            # Execucao agendada: apenas avisa, para nao mandar e-mail de falha
+            # todo dia enquanto a chave nao existir.
             print("::warning::Sincronizacao automatica desligada: faltam "
                   "GOOGLE_MAPS_API_KEY e GOOGLE_PLACE_ID. Veja SINCRONIZACAO.md.")
             return 0
