@@ -155,6 +155,24 @@ def main() -> int:
             corpo = e.read().decode("utf-8", "replace")[:400]
             print(f"ERRO: Google respondeu HTTP {e.code}: {corpo}", file=sys.stderr)
             if e.code in (401, 403):
+                # Diagnostico do formato, sem imprimir o valor em si.
+                if place_id.isdigit():
+                    print(
+                        f"\nATENCAO: GOOGLE_PLACE_ID tem {len(place_id)} caracteres e e SO\n"
+                        "  numeros. Isso e a cara de um CID (o codigo que aparece no link\n"
+                        "  do Google Maps), nao de um Place ID. Sao identificadores\n"
+                        "  diferentes. O Place ID quase sempre comeca com 'ChIJ'.\n"
+                        "  Pegue o certo em:\n"
+                        "  https://developers.google.com/maps/documentation/places/web-service/place-id\n",
+                        file=sys.stderr,
+                    )
+                elif not place_id.startswith("ChIJ"):
+                    print(
+                        f"\nObservacao: GOOGLE_PLACE_ID tem {len(place_id)} caracteres e nao\n"
+                        "  comeca com 'ChIJ', que e o prefixo mais comum. Pode estar certo,\n"
+                        "  mas vale conferir se nao foi colado o identificador errado.\n",
+                        file=sys.stderr,
+                    )
                 print(
                     "\nHTTP 403 aqui quase sempre e uma destas quatro coisas:\n"
                     "  1. A 'Places API (New)' nao esta ativada no projeto. Atencao: ela e\n"
