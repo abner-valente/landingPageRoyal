@@ -1,38 +1,47 @@
 # Sincronização com o Google
 
-A nota e o número de avaliações exibidos na página são atualizados
-automaticamente uma vez por dia, a partir do perfil da Royal no Google.
+A nota e o número de avaliações exibidos na página são atualizados por um
+script, para que nunca fiquem defasados em relação ao perfil da Royal no
+Google.
 
-## Como funciona
+**Hoje o projeto opera em modo manual.** A leitura automática exige uma conta
+de faturamento no Google Cloud, cuja criação pede um pré-pagamento, e essa
+decisão ficou em espera. Todo o código do modo automático está pronto e
+testado; falta só a credencial funcionar. O agendamento diário está
+desativado de propósito, para não gerar erro todo dia.
 
-1. Todo dia às 06:00 (horário de Brasília) o GitHub Actions roda
-   `scripts/sync_google.py`. Em horários de pico o GitHub pode atrasar
-   execuções agendadas em alguns minutos — isso é normal e não atrapalha.
-2. O script consulta a **Places API (New)** do Google e lê dois campos:
-   `rating` e `userRatingCount`.
-3. Se algo mudou, ele reescreve os valores no `index.html`, atualiza o
-   `dados-google.json` e faz commit.
-4. O commit dispara o deploy automático do Netlify.
+## Como atualizar (o procedimento do dia a dia)
 
-Se nada mudou, nenhum commit é criado. Se a consulta falhar, **nada é
-alterado** — a página continua com o último valor bom, e a execução aparece
-como falha no painel do GitHub.
+Confira o número no perfil do Google. Se mudou:
 
-## Atualizar na mão (funciona hoje, sem configurar nada)
-
-Enquanto a chave da API não existir — ou sempre que quiser corrigir na hora —
-dá para atualizar pelo painel do GitHub, sem mexer em código:
-
-1. Aba **Actions → Sincroniza avaliações do Google → Run workflow**
-2. Preencha **Total de avaliações** com o número que está no Google
-3. **Nota** só se ela tiver mudado; vazio mantém a atual
+1. Abra **Actions → Sincroniza avaliações do Google → Run workflow**
+2. Em **Total de avaliações**, digite o número novo — o campo é obrigatório
+3. **Nota**: deixe vazio, a não ser que ela tenha mudado de 5,0
 4. **Run workflow**
 
-O script reescreve os cinco pontos da página e as quatro tags de
-compartilhamento, faz commit, e o Netlify publica. Leva menos de um minuto.
+Em menos de um minuto o número está no ar. O script reescreve os cinco pontos
+da página e as quatro tags de compartilhamento, faz commit, e o Netlify
+publica sozinho.
 
-É o mesmo código do modo automático — muda só de onde vem o número, então não
-existe risco de os dois caminhos divergirem.
+> **Não edite o `dados-google.json` na mão.** Ele não é a fonte do número: é
+> um registro do último valor gravado, escrito pelo próprio script e usado
+> para comparar de uma execução para outra. Mudar ele não altera a página, e
+> um valor inventado ali pode fazer o script recusar a próxima atualização,
+> por parecer uma queda brusca. O único lugar onde você informa o número é o
+> campo do formulário.
+
+Se você digitar o número que já está publicado, o script percebe e não faz
+nada — nenhum commit, nenhum deploy. Repetir é seguro.
+
+## O que muda quando o automático for ligado
+
+Nada no procedimento acima: ele continua valendo como atalho de correção. O
+automático apenas passa a rodar sozinho todo dia de manhã. É o mesmo código
+nos dois modos — muda só de onde vem o número, então os dois caminhos não têm
+como divergir.
+
+Para religar, veja os comentários no topo de
+`.github/workflows/sync-google.yml`.
 
 ## O que precisa ser configurado (uma vez só)
 

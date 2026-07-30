@@ -1,21 +1,26 @@
 name: Sincroniza avaliações do Google
 
 on:
-  schedule:
-    # 09:00 UTC = 06:00 em Brasília. Cron do GitHub sempre roda em UTC, e o
-    # Brasil nao tem mais horario de verao, entao a conta e fixa (UTC-3).
-    # O GitHub pode atrasar execucoes agendadas em horarios de pico; o
-    # numero de avaliacoes nao muda de minuto em minuto, entao tudo bem.
-    - cron: "0 9 * * *"
+  # AGENDAMENTO DESLIGADO.
+  # A leitura automatica depende da Places API, que exige conta de faturamento
+  # no Google Cloud -- e criar essa conta pede um pre-pagamento. Enquanto isso
+  # nao existir, deixar o cron ligado so produziria erro 403 e um e-mail de
+  # falha por dia, sem nunca atualizar nada.
+  #
+  # Para religar quando o faturamento estiver resolvido:
+  #   1. descomente as duas linhas de schedule abaixo
+  #   2. volte o campo "total" para required: false
+  # Ai o campo vazio passa a significar "leia do Google".
+  #
+  # schedule:
+  #   - cron: "0 9 * * *"   # 09:00 UTC = 06:00 em Brasília (UTC-3, sem horário de verão)
   workflow_dispatch: # rodar na mão pelo painel do GitHub
     inputs:
       total:
-        # Opcional de novo agora que existe chave da API: em branco significa
-        # "leia do Google", que e uma acao util. Se faltar a chave, o script
-        # falha explicando, em vez de terminar em verde sem fazer nada.
-        description: "Total de avaliações — deixe VAZIO para ler do Google"
-        required: false
-        default: ""
+        # Obrigatorio: em modo manual, campo vazio tentaria ler do Google e
+        # bateria no 403. Sem valor padrao, o proprio GitHub barra o envio.
+        description: "Total de avaliações que aparece no Google (ex: 292)"
+        required: true
       nota:
         description: "Nota — deixe vazio para manter a atual (ex: 5,0)"
         required: false
