@@ -50,9 +50,9 @@ afetar o site.
 ela não depende de nenhum outro arquivo do site — que, durante a manutenção,
 estaria sendo redirecionado também.
 
-**O atendimento continua.** A página traz WhatsApp, telefone e Instagram em
-destaque, além do link para as avaliações no Google. A ideia é que ninguém que
-chegue ao site durante a manutenção vá embora sem ter como falar com a Royal.
+**A página é deliberadamente mínima.** Só o logo e a mensagem, sem contatos e
+sem links. Se um dia quiser incluir WhatsApp ou Instagram ali, é só pedir —
+o desenho comporta.
 
 **Não deixe ligado por muitos dias.** A página responde com status 200 e tem
 `noindex`, que impede o Google de indexar "em manutenção" como se fosse o
