@@ -1,0 +1,20 @@
+# ===========================================================
+#  MODO MANUTENCAO  --  ESTE ARQUIVO ESTA DESLIGADO
+# ===========================================================
+#
+#  O Netlify so le este arquivo se o nome dele for exatamente
+#  "_redirects". Com qualquer outro nome -- como este, com o
+#  sufixo .off -- ele e ignorado e o site funciona normalmente.
+#
+#  LIGAR manutencao .... renomeie para          _redirects
+#  DESLIGAR manutencao . renomeie de volta para _redirects.off
+#
+#  Passo a passo pelo GitHub: veja MANUTENCAO.md
+# ===========================================================
+
+# Entrega a pagina de manutencao em qualquer caminho, sem mudar a URL.
+#
+# O "!" no fim NAO e opcional: por padrao o Netlify da precedencia a um
+# arquivo que exista de verdade, entao sem ele o index.html continuaria
+# sendo servido e a manutencao nao teria efeito nenhum.
+/*    /manutencao.html    200!
